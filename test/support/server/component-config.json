@@ -1,0 +1,8 @@
+{
+    "../../../index": {
+        "enabled": true,
+        "tasks": [
+            "path to the task or task directory"
+        ]
+    }
+}
