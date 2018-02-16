@@ -1,5 +1,5 @@
 {
-    "name": "loopback-component-jb-migration",
+    "name": "@joinbox/loopback-component-jb-migration",
     "version": "0.1.0",
     "description": "Simple migration component",
     "main": "index.js",
