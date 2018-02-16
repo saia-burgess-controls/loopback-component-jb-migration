@@ -1,8 +1,12 @@
 # loopback-component-jb-migration
 
-Migration component for loopback. Really early stage.
+Migration component for loopback. Really early stage and does not work as expected yet.
 
+## Todo:
 
+  1. Find the correct timing/phase to run the migrations.
+  1. Try to integrate transactions.
+  1. Try to make it possible to load and register tasks (_e.g._ from disk)
 
 ## Notes:
 
