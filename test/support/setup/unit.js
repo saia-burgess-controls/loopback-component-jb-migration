@@ -9,9 +9,9 @@ before('enable chai as promised', function(){
 });
 
 before('boot service', async function(){
-    const options = {
+    const boot = {
         appRootDir: path.resolve(__dirname, '../server'),
-        env: 'test'
+        env: 'test',
     };
-    this.service = await Microservice.boot(options);
+    this.service = await Microservice.boot({ boot });
 });

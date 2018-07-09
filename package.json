@@ -20,31 +20,28 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/joinbox/loopback-relation-filter.git"
+        "url": "git+https://github.com/joinbox/loopback-component-jb-migration.git"
     },
     "keywords": [
         "loopback",
-        "relations",
-        "filter",
-        "where",
-        "query"
+        "migration"
     ],
     "author": "Michael Rüfenacht",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/joinbox/loopback-relation-filter/issues"
+        "url": "https://github.com/joinbox/loopback-component-jb-migration/issues"
     },
-    "homepage": "https://github.com/joinbox/loopback-relation-filter#readme",
+    "homepage": "https://github.com/joinbox/loopback-component-jb-migration#readme",
     "devDependencies": {
+        "@joinbox/eslint-config-joinbox": "^1.0.5",
         "chai": "^4.1.2",
         "chai-as-promised": "^7.1.1",
-        "eslint": "^4.12.1",
-        "eslint-config-joinbox": "git+https://github.com/joinbox/joinbox-linter-configuration.git",
-        "loopback-connector-postgresql": "^3.2.0",
-        "mocha": "^4.0.1",
-        "strong-error-handler": "^2.3.0"
+        "eslint": "^4.19.1",
+        "loopback-connector-postgresql": "^3.3.2",
+        "mocha": "^4.1.0",
+        "strong-error-handler": "^2.3.2"
     },
     "dependencies": {
-        "@joinbox/loopback-microservice": "^0.1.0"
+        "@joinbox/loopback-microservice": "^1.0.0"
     }
 }

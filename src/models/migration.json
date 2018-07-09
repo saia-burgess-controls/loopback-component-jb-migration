@@ -1,24 +1,25 @@
 {
-    "name"        : "Migration",
-    "plural"      : "migrations",
-    "base"        : "PersistedModel",
-    "idInjection" : true,
-    "strict"      : true,
-    "options"     : {
+    "name": "Migration",
+    "plural": "migrations",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "strict": true,
+    "options": {
         "validateUpsert" : true
     },
-    "properties"  : {
-        "started"    : {
-            "type" : "date",
-            "required" : "true"
+    "properties": {
+        "started": {
+            "type": "date",
+            "required": true
         },
-        "identifier" : {
-            "type" : "string"
+        "identifier": {
+            "type" : "string",
+            "required": true
         },
-        "version" : {
+        "version": {
             "type": "string"
         },
-        "succeeded" : {
+        "succeeded": {
             "type" : "date",
             "default": null
         },
@@ -26,8 +27,8 @@
             "type" : "date",
             "default": null
         },
-        "data"       : {
-            "type" : "json",
+        "data": {
+            "type" : "string",
             "default": null
         }
     },
