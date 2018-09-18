@@ -1,75 +1,48 @@
 const Task = require('./Task');
 
+/**
+ * @type {module.MigrationTask}
+ */
+
 module.exports = class MigrationTask extends Task {
 
-    constructor(task, rerun = false) {
-        const name = `Migration:${task.name}`;
-        super(name, task.version);
+    constructor(task) {
+        const identifier = `Migration:${task.identifier}`;
+        const { version, options } = task;
+        super({identifier, version, options});
+
         this.task = task;
-        this.rerun = rerun;
     }
 
-    async run(dependencies) {
+    /**
+     * @param app
+     * @return {Promise.<*>}
+     */
+    async run({ MigrationModel, transaction }) {
 
-        await this.ensureDependencies(dependencies, ['app']);
+        const ranSuccessfully = await MigrationModel.taskRanSuccessfully(this.task, transaction);
 
-        const migrationModel = dependencies.app.models.Migration;
-        const migrationRanBefore = await this.migrationAlreadyPerformed(migrationModel);
+        if (ranSuccessfully) {
+            return null;
+        }
 
-        if (migrationRanBefore && this.rerun === false) return Promise.resolve();
-
-        const migration = await this.createMigration(migrationModel);
+        const migration = await MigrationModel.startTask(this.task, transaction);
 
         try {
-            const result = await this.runTask(dependencies);
-            return this.finalizeMigration(migration, result);
+            const result = await this.task.run({ MigrationModel, transaction });
+            return this.finalizeMigration(migration, result, null, transaction);
         } catch (err) {
-            return this.finalizeMigration(migration, null, err);
+            return this.finalizeMigration(migration, null, err, transaction);
         }
     }
 
-    async finalizeMigration(migration, result, err) {
-        if (err) {
-            migration.failed = new Date();
-            migration.data = JSON.stringify(err);
-        } else {
-            migration.succeeded = new Date();
-            migration.data = JSON.stringify(result);
+    async finalizeMigration(migration, result = null, error = null, transaction) {
+        if (migration) {
+            await migration.stopTask(result, error, transaction);
         }
-        return migration.save();
+        if (error) {
+            return Promise.reject(error);
+        }
+        return result;
     }
-
-    async migrationAlreadyPerformed(migrationModel) {
-        //@todo: should we define a max time a migration is allowed to run?
-        //       then query the start date accordingly?
-        const params = {
-            where: {
-                identifier: this.name,
-                version: this.version,
-                succeeded: {
-                    neq: null,
-                }
-            },
-        };
-        const result = await migrationModel.findOne(params);
-        return !!result;
-    }
-
-    async createMigration(migrationModel) {
-        const migrationData = {
-            started: new Date(),
-            identifier: this.name,
-            version: this.version
-        };
-        return migrationModel.create(migrationData);
-    }
-
-    async revert() {
-        return this.task.revert();
-    }
-
-    async runTask(dependencies) {
-        return this.task.run(dependencies);
-    }
-
 };

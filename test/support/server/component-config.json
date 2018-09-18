@@ -2,7 +2,24 @@
     "../../../index": {
         "enabled": true,
         "tasks": [
-            "path to the task or task directory"
-        ]
+            {
+                "identifier": "CreateMigrationModel"
+            }
+        ],
+        "queues": {
+            "name": {
+                "migrationModel": "MigrationDB",
+                "transaction": {
+                    "enabled": true,
+                    "options": {}
+                },
+                "tasks": [
+                    {
+                        "identifier": "",
+                        "source": "filePath"
+                    }
+                ]
+            }
+        }
     }
 }

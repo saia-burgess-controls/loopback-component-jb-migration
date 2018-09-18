@@ -3,15 +3,20 @@
         "sources": [
             "loopback/common/models",
             "loopback/server/models",
-            "../../../src/models"
+            "../../../src/models",
+            "./models"
         ],
         "mixins": [
             "loopback/common/mixins",
             "loopback/server/mixins",
-            "../mixins"
+            "../../../src/mixins"
         ]
     },
     "Migration": {
+        "dataSource": "db",
+        "public": false
+    },
+    "MemoryMigration": {
         "dataSource": "memory",
         "public": false
     }

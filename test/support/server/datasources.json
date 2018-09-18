@@ -2,5 +2,15 @@
   "memory": {
     "name": "memory",
     "connector": "memory"
+  },
+  "db": {
+    "name": "db",
+    "connector": "postgresql",
+    "host": "0.0.0.0",
+    "database": "migration_test",
+    "schema": "migration_test",
+    "port": 8765,
+    "user": "migration_test",
+    "password": "migration_test_pwd"
   }
 }

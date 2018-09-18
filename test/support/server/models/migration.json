@@ -1,0 +1,20 @@
+{
+    "name": "Migration",
+    "plural": "migrations",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "strict": true,
+    "mixins": {
+        "MigrationMixin": {}
+    },
+    "options": {
+        "validateUpsert" : true,
+        "postgresql": {
+            "table": "Migration"
+        }
+    },
+    "validations" : [],
+    "relations"   : {},
+    "acls"        : [],
+    "methods"     : {}
+}
