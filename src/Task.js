@@ -16,7 +16,7 @@ module.exports = class Task {
         return this.options.runAlways === true;
     }
 
-    constructor({identifier, version, options = {} }) {
+    constructor({identifier, version = '1.0.0', options = {} }) {
         this.identifier = identifier;
         this.version = version;
         this.options = options;

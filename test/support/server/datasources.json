@@ -8,7 +8,7 @@
     "connector": "postgresql",
     "host": "0.0.0.0",
     "database": "migration_test",
-    "schema": "migration_test",
+    "schema": "migration_package",
     "port": 8765,
     "user": "migration_test",
     "password": "migration_test_pwd"

@@ -1,3 +1,4 @@
+const MigrationError = require('./error/MigrationError');
 const Task = require('./Task');
 
 /**
@@ -32,7 +33,9 @@ module.exports = class MigrationTask extends Task {
             const result = await this.task.run({ MigrationModel, transaction });
             return this.finalizeMigration(migration, result, null, transaction);
         } catch (err) {
-            return this.finalizeMigration(migration, null, err, transaction);
+            const msg = `MigrationTask ${this.identifier} failed with message: ${err.message}`;
+            const error = new MigrationError(msg, { originalError: err });
+            return this.finalizeMigration(migration, null, error, transaction);
         }
     }
 

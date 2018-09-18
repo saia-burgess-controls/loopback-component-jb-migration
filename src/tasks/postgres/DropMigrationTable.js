@@ -5,13 +5,16 @@ const ExecuteSQLStatementTask = require('../ExecuteSQLStatementTask');
 module.exports = class DropMigrationTable extends ExecuteSQLStatementTask {
 
     constructor({ version, options = {}} = {}) {
-        const opts = Object.assign({}, options, { runAlways: true });
-        const filePath = path.resolve(__dirname, './dropMigrationTable.sql');
+        const opts = Object.assign({}, options, { runAlways: true });;
         super({
-            filePath,
             identifier: 'Postgres:DropMigrationTable',
             options: opts,
             version,
         });
+    }
+
+    async getStatement({ MigrationModel }){
+        const schema = this.getSchema(MigrationModel);
+        return `DROP TABLE IF EXISTS "${schema}"."Migration";`;
     }
 };
