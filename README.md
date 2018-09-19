@@ -96,6 +96,8 @@ provide a flexible interface for future versions. Every task has an identifier.
 If you want to create a custom task, just extend the Task class and implement the aforementioned
 `run` method.
 
+You might note the version parameter in the Task class. Be aware that it is not used yet.
+
 ### MigrationTask
 
 A MigrationTask is an extended version of the basic Task class which delegates to a concrete task
