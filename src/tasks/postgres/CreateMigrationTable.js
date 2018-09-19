@@ -1,7 +1,11 @@
-const path = require('path');
+const ExecuteSQLStatementTask = require('../ExecuteSQLStatementTask.js');
 
-const ExecuteSQLStatementTask = require('../ExecuteSQLStatementTask');
-
+/**
+ * Task to create the table of the migration model in a postgres datasource as required by the
+ * MigrationMixin.
+ *
+ * @see src/mixins/MigrationMixin.js
+ */
 module.exports = class CreateMigrationTable extends ExecuteSQLStatementTask {
 
     constructor({ version, options = {}} = {}) {
@@ -13,6 +17,14 @@ module.exports = class CreateMigrationTable extends ExecuteSQLStatementTask {
         });
     }
 
+    /**
+     * Returns the create table statement respecting the schema and the configured table of
+     * the MigrationModel.
+     *
+     * @override
+     * @param MigrationModel
+     * @return {Promise<string>}
+     */
     async getStatement({ MigrationModel }) {
         const schema = this.getSchema(MigrationModel);
         const table = this.getTable(MigrationModel);

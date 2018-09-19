@@ -1,5 +1,5 @@
-const MigrationError = require('./MigrationError');
+const MigrationError = require('./MigrationError.js');
 
 module.exports = {
-    MigrationError
+    MigrationError,
 };

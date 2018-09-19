@@ -1,7 +1,7 @@
-const MigrationTask = require('./MigrationTask');
-const MigrationQueue = require('./MigrationQueue');
-const Task = require('./Task');
-const tasks = require('./tasks');
+const MigrationTask = require('./MigrationTask.js');
+const MigrationQueue = require('./MigrationQueue.js');
+const Task = require('./Task.js');
+const tasks = require('./tasks/index.js');
 
 /**
  * Wrapper for the migration functionality.
@@ -11,7 +11,6 @@ const tasks = require('./tasks');
  *
  * @type {module.MigrationComponent}
  */
-
 module.exports = class MigrationComponent {
     constructor(options) {
         this.options = options;

@@ -1,10 +1,23 @@
-const { MigrationError } = require('./error');
+const { MigrationError } = require('./error/index.js');
 
 /**
- * Basic queue to process migration tasks.
+ * Queue that runs the passed tasks in the given order.
+ *
+ * The queue
+ *   1. resolves the migration model (which is used to determine the datasource)
+ *   2. creates a transaction on the datasource if configured accordingly
+ *   3. runs one task after the other and hands over the result to the next one
+ *   4. commits the transaction (if present) or roles it back on failure
+ *
+ * @note: in future versions a MigrationQueue should fulfill the task interface
  */
 module.exports = class MigrationQueue {
 
+    /**
+     * Determine if the queue should open up a transaction.
+     *
+     * @return {boolean}
+     */
     get requiresTransaction() {
         return this.transactionConfig !== null;
     }
@@ -15,12 +28,25 @@ module.exports = class MigrationQueue {
         this.migrationModelName = migrationModelName;
     }
 
+    /**
+     * Runs all tasks (see task interface)
+     *
+     * @param { app }
+     * @return {Promise<*|void>}
+     */
     async run(dependencies) {
         const deps = await this.setupDependencies(dependencies);
         return this.runTasks(deps);
 
     }
 
+    /**
+     * Iterate over all tasks and execute them.
+     *
+     * @param MigrationModel
+     * @param transaction
+     * @return {Promise<*>}
+     */
     async runTasks({ MigrationModel, transaction }) {
         try {
             let previousResult = null;
@@ -40,6 +66,15 @@ module.exports = class MigrationQueue {
         }
     }
 
+    /**
+     * Sets up the dependencies for the queue (i.e. the MigrationModel and the transaction).
+     *
+     * Future versions might have a more sophisticted resolving and can check for missing
+     * dependencies.
+     *
+     * @param app
+     * @return {Promise<{MigrationModel: *, transaction: null}>}
+     */
     async setupDependencies({ app }) {
         const MigrationModel = this.resolveMigrationModel(app);
         const transaction = this.requiresTransaction
@@ -52,6 +87,12 @@ module.exports = class MigrationQueue {
         };
     }
 
+    /**
+     * Extracts the migration model from the app based on the configured migrationModelName.
+     *
+     * @param app
+     * @return {*}
+     */
     resolveMigrationModel(app) {
         if (!Object.prototype.hasOwnProperty.call(app.models, this.migrationModelName)) {
             throw new MigrationError(`MigrationModel "${this.migrationModelName}" does not exist`);

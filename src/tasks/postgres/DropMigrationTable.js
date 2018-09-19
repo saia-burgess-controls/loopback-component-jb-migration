@@ -1,7 +1,10 @@
-const path = require('path');
+const ExecuteSQLStatementTask = require('../ExecuteSQLStatementTask.js');
 
-const ExecuteSQLStatementTask = require('../ExecuteSQLStatementTask');
-
+/**
+ * Task to drop the migration table in a postgres datasource.
+ *
+ * Mainly used for testing.
+ */
 module.exports = class DropMigrationTable extends ExecuteSQLStatementTask {
 
     constructor({ version, options = {}} = {}) {
@@ -13,6 +16,12 @@ module.exports = class DropMigrationTable extends ExecuteSQLStatementTask {
         });
     }
 
+    /**
+     * Returns the statement to drop the table.
+     *
+     * @param MigrationModel
+     * @return {Promise<string>}
+     */
     async getStatement({ MigrationModel }){
         const schema = this.getSchema(MigrationModel);
         const table = this.getTable(MigrationModel);
