@@ -15,8 +15,9 @@ module.exports = class CreateMigrationTable extends ExecuteSQLStatementTask {
 
     async getStatement({ MigrationModel }) {
         const schema = this.getSchema(MigrationModel);
+        const table = this.getTable(MigrationModel);
         return `
-          CREATE TABLE IF NOT EXISTS "${schema}"."Migration" (
+          CREATE TABLE IF NOT EXISTS "${schema}"."${table}" (
               id SERIAL PRIMARY KEY,
               identifier VARCHAR(100) NOT NULL,
               started    TIMESTAMP    NOT NULL,

@@ -15,6 +15,7 @@ module.exports = class DropMigrationTable extends ExecuteSQLStatementTask {
 
     async getStatement({ MigrationModel }){
         const schema = this.getSchema(MigrationModel);
-        return `DROP TABLE IF EXISTS "${schema}"."Migration";`;
+        const table = this.getTable(MigrationModel);
+        return `DROP TABLE IF EXISTS "${schema}"."${table}";`;
     }
 };

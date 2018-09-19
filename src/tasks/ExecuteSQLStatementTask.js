@@ -24,6 +24,10 @@ module.exports = class ExecuteSQLStatementTask extends Task {
         return MigrationModel.dataSource.connector.schema(MigrationModel.modelName);
     }
 
+    getTable(MigrationModel) {
+        return MigrationModel.dataSource.connector.table(MigrationModel.modelName);
+    }
+
     async getStatement() {
         return this.statement
             || this.readFile(this.filePath);
