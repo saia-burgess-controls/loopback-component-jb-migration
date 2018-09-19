@@ -28,7 +28,7 @@ use a transaction (via the `options`).
 
 ## Schema
 In your tasks you can execute raw sql (have a look at the `CreateMigrationTable` class in the tasks
-folder). While one can usually override the `schema` per model using connector specific
+folder). One can usually override the `schema` per model using connector specific
 configuration, _i.e._
 
 ```JSON
@@ -44,5 +44,10 @@ configuration, _i.e._
 }
 ```
 
-As soon as you perform raw sql queries you'll be restricted to the schema your datasource is
-tied to.
+or per datasource. As soon as you perform raw sql queries you'll be responsible to handle
+the schema yourself.
+
+> **Note:** Be aware that Postgres resolves the schema based on the `search_path` which is
+`"$user", public` by default. So if you have a schema that has got the same name as the user opening
+the connection, it misleadingly looks like your queries do respect the schema out of the box.
+**They don't!**
