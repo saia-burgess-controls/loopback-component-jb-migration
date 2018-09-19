@@ -1,0 +1,11 @@
+{
+    "final:after": {
+        "@joinbox/loopback-microservice#errorHandler": {
+            "params": {
+                "debug": true,
+                "log": true,
+                "serviceName": "migration_test_service"
+            }
+        }
+    }
+}

@@ -1,7 +1,7 @@
 {
     "name": "@joinbox/loopback-component-jb-migration",
     "version": "1.0.0",
-    "description": "Simple migration component",
+    "description": "Component providing data structures to perform custom migrations in Loopback applications",
     "main": "index.js",
     "directories": {
         "test": "test"
@@ -13,7 +13,7 @@
     "scripts": {
         "lint": "node_modules/.bin/eslint .",
         "test:watch": "WATCH_TESTS=\"--watch\" npm run test",
-        "test:base": "echo $NODE_DEBUG_OPTION && mocha $NODE_DEBUG_OPTION $WATCH_TESTS --recursive --check-leaks --full-trace --exit",
+        "test:base": "mocha $NODE_DEBUG_OPTION $WATCH_TESTS --recursive --check-leaks --full-trace --exit",
         "test:unit": "npm run test:base ./test/support/setup/unit.js ./test/unit",
         "test:integration": "npm run test:base ./test/support/setup/integration.js ./test/integration",
         "test": "npm run test:base ./test/support/setup/integration.js ./test/integration ./test/unit",
@@ -40,8 +40,7 @@
         "eslint": "^4.19.1",
         "loopback-connector-postgresql": "^3.3.2",
         "mocha": "^4.1.0",
-        "nyc": "^12.0.2",
-        "strong-error-handler": "^2.3.2"
+        "nyc": "^12.0.2"
     },
     "dependencies": {
         "@joinbox/loopback-microservice": "^1.0.0"
