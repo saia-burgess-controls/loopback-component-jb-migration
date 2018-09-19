@@ -128,7 +128,7 @@ class MyTask extends Task {
 }
 ```
 
-#### MigrationQueue
+### MigrationQueue
 
 The MigrationQueue takes all your tasks (doesn't matter if it is a MigrationTask or a _plain_ Task)
 and runs them one after the other. It determines which is the current MigrationModel and opens a
@@ -222,6 +222,7 @@ module.exports = async (app) => {
     );
     return queue.run({ app });
 };
+```
 
 ## Databases
 
