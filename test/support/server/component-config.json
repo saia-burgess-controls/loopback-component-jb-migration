@@ -1,25 +1,4 @@
 {
     "../../../index": {
-        "enabled": true,
-        "tasks": [
-            {
-                "identifier": "CreateMigrationModel"
-            }
-        ],
-        "queues": {
-            "name": {
-                "migrationModel": "MigrationDB",
-                "transaction": {
-                    "enabled": true,
-                    "options": {}
-                },
-                "tasks": [
-                    {
-                        "identifier": "",
-                        "source": "filePath"
-                    }
-                ]
-            }
-        }
     }
 }
