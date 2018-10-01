@@ -1,7 +1,7 @@
 {
     "name": "@joinbox/loopback-component-jb-migration",
-    "version": "0.1.0",
-    "description": "Simple migration component",
+    "version": "1.0.0",
+    "description": "Component providing data structures to perform custom migrations in Loopback applications",
     "main": "index.js",
     "directories": {
         "test": "test"
@@ -13,38 +13,36 @@
     "scripts": {
         "lint": "node_modules/.bin/eslint .",
         "test:watch": "WATCH_TESTS=\"--watch\" npm run test",
-        "test:base": "mocha $NODE_DEBUG_OPTION $WATCH_TESTS --recursive --check-leaks --full-trace --exit",
+        "test:base": "./node_modules/.bin/mocha $NODE_DEBUG_OPTION $WATCH_TESTS --recursive --check-leaks --full-trace --exit",
         "test:unit": "npm run test:base ./test/support/setup/unit.js ./test/unit",
         "test:integration": "npm run test:base ./test/support/setup/integration.js ./test/integration",
-        "test": "npm run test:base ./test/support/setup/integration.js ./test/integration ./test/unit"
+        "test": "npm run test:base ./test/support/setup/integration.js ./test/integration ./test/unit",
+        "test:coverage": "./node_modules/.bin/nyc npm test"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/joinbox/loopback-relation-filter.git"
+        "url": "git+https://github.com/joinbox/loopback-component-jb-migration.git"
     },
     "keywords": [
         "loopback",
-        "relations",
-        "filter",
-        "where",
-        "query"
+        "migration"
     ],
     "author": "Michael Rüfenacht",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/joinbox/loopback-relation-filter/issues"
+        "url": "https://github.com/joinbox/loopback-component-jb-migration/issues"
     },
-    "homepage": "https://github.com/joinbox/loopback-relation-filter#readme",
+    "homepage": "https://github.com/joinbox/loopback-component-jb-migration#readme",
     "devDependencies": {
+        "@joinbox/eslint-config-joinbox": "^1.0.5",
         "chai": "^4.1.2",
         "chai-as-promised": "^7.1.1",
-        "eslint": "^4.12.1",
-        "eslint-config-joinbox": "git+https://github.com/joinbox/joinbox-linter-configuration.git",
-        "loopback-connector-postgresql": "^3.2.0",
-        "mocha": "^4.0.1",
-        "strong-error-handler": "^2.3.0"
+        "eslint": "^4.19.1",
+        "loopback-connector-postgresql": "^3.3.2",
+        "mocha": "^4.1.0",
+        "nyc": "^12.0.2"
     },
     "dependencies": {
-        "@joinbox/loopback-microservice": "^0.1.0"
+        "@joinbox/loopback-microservice": "^1.0.0"
     }
 }
