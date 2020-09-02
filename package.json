@@ -1,5 +1,5 @@
 {
-    "name": "@joinbox/loopback-component-jb-migration",
+    "name": "@maugli-sbc/loopback-component-jb-migration",
     "version": "1.0.0",
     "description": "Component providing data structures to perform custom migrations in Loopback applications",
     "main": "index.js",
